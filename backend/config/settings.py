@@ -131,9 +131,8 @@ STATIC_URL = 'static/'
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
+    "https://electrorent.netlify.app",
 ]
-
 
 AUTH_USER_MODEL = 'accounts.User'
 

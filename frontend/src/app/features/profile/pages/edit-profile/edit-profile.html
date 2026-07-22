@@ -1,0 +1,107 @@
+<section class="container py-5">
+
+    <h2 class="mb-4">
+
+        Edit Profile
+
+    </h2>
+
+    <form
+        [formGroup]="profileForm"
+        (ngSubmit)="saveProfile()">
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+
+                    First Name
+
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="first_name">
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+
+                    Last Name
+
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="last_name">
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+
+                    Email
+
+                </label>
+
+                <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email">
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+
+                    Phone
+
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="phone">
+
+            </div>
+
+            <div class="col-12 mb-3">
+
+                <label class="form-label">
+
+                    Address
+
+                </label>
+
+                <textarea
+                    rows="4"
+                    class="form-control"
+                    formControlName="address">
+                </textarea>
+
+            </div>
+
+            <div class="col-12">
+
+                <button
+                    class="btn btn-primary"
+                    type="submit">
+
+                    Update Profile
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</section>

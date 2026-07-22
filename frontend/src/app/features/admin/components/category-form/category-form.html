@@ -1,0 +1,28 @@
+<form
+    [formGroup]="categoryForm"
+    (ngSubmit)="saveCategory()">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Category Name
+
+        </label>
+
+        <input
+            type="text"
+            class="form-control"
+            formControlName="name">
+
+    </div>
+
+    <button
+        type="submit"
+        class="btn btn-primary">
+
+        {{ isEditMode ? 'Update Category' : 'Save Category' }}
+
+    </button>
+
+</form>

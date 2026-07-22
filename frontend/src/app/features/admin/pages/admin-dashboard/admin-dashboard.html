@@ -1,0 +1,295 @@
+<section class="container py-5">
+
+    <h2 class="mb-4">
+        Admin Dashboard
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Total Products
+                    </h6>
+
+                    <h1 class="fw-bold text-primary">
+                        {{ totalProducts }}
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Total Bookings
+                    </h6>
+
+                    <h1 class="fw-bold text-success">
+                        {{ totalBookings }}
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Pending
+                    </h6>
+
+                    <h1 class="fw-bold text-warning">
+                        {{ pendingBookings }}
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Completed
+                    </h6>
+
+                    <h1 class="fw-bold text-info">
+                        {{ completedBookings }}
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow border-0 mb-5">
+
+        <div class="card-body">
+
+            <h4 class="mb-4">
+
+                Quick Actions
+
+            </h4>
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <a
+                    routerLink="/admin/products"
+                    class="btn btn-primary">
+
+                        Products
+
+                </a>
+
+                <a
+                    routerLink="/admin/categories"
+                    class="btn btn-success">
+
+                        Categories
+
+                </a>
+
+                <a
+                    routerLink="/admin/bookings"
+                    class="btn btn-warning">
+
+                        Bookings
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row">
+
+        <div class="col-lg-6 mx-auto">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h4 class="text-center mb-4">
+
+                        Booking Status
+
+                    </h4>
+
+                    <canvas id="bookingChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row">
+
+        <!-- Monthly Bookings -->
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <h4 class="text-center mb-4">
+
+                        Monthly Bookings
+
+                    </h4>
+
+                    <canvas id="monthlyChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Monthly Revenue -->
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <h4 class="text-center mb-4">
+
+                        Monthly Revenue
+
+                    </h4>
+
+                    <canvas id="revenueChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr class="my-5">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h4 class="mb-4">
+
+                Recent Bookings
+
+            </h4>
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Customer</th>
+
+                        <th>Product</th>
+
+                        <th>Status</th>
+
+                        <th>Total</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @for (booking of recentBookings; track booking.id) {
+
+                        <tr>
+
+                            <td>{{ booking.user }}</td>
+
+                            <td>{{ booking.product }}</td>
+
+                            <td>
+
+                                {{ booking.status }}
+
+                            </td>
+
+                            <td>
+
+                                ₹{{ booking.total_amount }}
+
+                            </td>
+
+                        </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-4 ml">
+
+        <div class="card shadow border-0 h-100">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Total Revenue
+                </h6>
+
+                <h1 class="fw-bold text-success">
+
+                    ₹{{ totalRevenue }}
+
+                </h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

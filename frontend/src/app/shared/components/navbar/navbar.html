@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+
+    <a class="navbar-brand" routerLink="/">
+      ElectroRent
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarMenu">
+
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse"
+      id="navbarMenu">
+
+      <div class="navbar-nav ms-auto">
+
+        <a class="nav-link" routerLink="/">
+          Home
+        </a>
+
+        <a class="nav-link" routerLink="/products">
+          Products
+        </a>
+
+        @if (!isLoggedIn()) {
+
+          <a class="nav-link" routerLink="/login">
+            Login
+          </a>
+
+          <a class="nav-link" routerLink="/register">
+            Register
+          </a>
+
+        }@else {
+
+          @if (isAdmin()) {
+
+            <a class="nav-link" routerLink="/admin">
+              Dashboard
+            </a>
+
+            <a class="nav-link" routerLink="/admin/products">
+              Manage Products
+            </a>
+
+            <a class="nav-link" routerLink="/admin/categories">
+             Manage Categories
+            </a>
+
+            <a class="nav-link" routerLink="/admin/bookings">
+              Manage Bookings
+            </a>
+
+          } @else {
+
+            <a class="nav-link" routerLink="/my-bookings">
+              My Bookings
+            </a>
+
+          }
+
+          <a class="nav-link" routerLink="/profile">
+            {{ getUsername() }}
+          </a>
+
+          <a
+            class="nav-link"
+            href="#"
+            (click)="logout(); $event.preventDefault()">
+
+            Logout
+
+          </a>
+
+        }
+      </div>
+
+    </div>
+
+  </div>
+</nav>

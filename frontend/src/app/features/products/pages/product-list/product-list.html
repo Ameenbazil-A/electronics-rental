@@ -1,0 +1,207 @@
+<section class="py-5">
+
+    <div class="container">
+
+        <!-- Search -->
+        <!-- Filters -->
+        <div class="card shadow-sm mb-5">
+
+            <div class="card-body">
+
+                <div class="row g-3 align-items-end">
+
+                    <!-- Search -->
+                    <div class="col-12 col-lg-5">
+
+                        <label class="form-label fw-semibold">
+
+                            Search
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Search products..."
+                            [(ngModel)]="searchText"
+                            (input)="onSearch()">
+
+                    </div>
+
+                    <!-- Category -->
+                    <div class="col-12 col-md-4 col-lg-2">
+
+                        <label class="form-label fw-semibold">
+
+                            Category
+
+                        </label>
+
+                        <select
+                            class="form-select"
+                            [(ngModel)]="selectedCategory"
+                            (change)="onCategoryChange()">
+
+                            <option value="">
+                                All
+                            </option>
+
+                            @for (category of categories; track category.id) {
+
+                                <option [value]="category.id">
+
+                                    {{ category.name }}
+
+                                </option>
+
+                            }
+
+                        </select>
+
+                    </div>
+
+                    <!-- Sort -->
+                    <div class="col-12 col-md-4 col-lg-2">
+
+                        <label class="form-label fw-semibold">
+
+                            Sort
+
+                        </label>
+
+                        <select
+                            class="form-select"
+                            [(ngModel)]="selectedSort"
+                            (change)="onSortChange()">
+
+                            <option value="-created_at">
+
+                                Newest
+
+                            </option>
+
+                            <option value="daily_rent">
+
+                                Price ↑
+
+                            </option>
+
+                            <option value="-daily_rent">
+
+                                Price ↓
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="col-12 col-md-4 col-lg-3">
+
+                        <label class="form-label fw-semibold">
+
+                            Availability
+
+                        </label>
+
+                        <select
+                            class="form-select"
+                            [(ngModel)]="selectedAvailability"
+                            (change)="onAvailabilityChange()">
+
+                            <option value="">
+
+                                All Products
+
+                            </option>
+
+                            <option value="true">
+
+                                Available
+
+                            </option>
+
+                            <option value="false">
+
+                                Unavailable
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Heading -->
+        <div class="mb-5">
+
+            <h2 class="fw-bold">
+                Products
+            </h2>
+
+            <p class="text-muted">
+                Browse all available electronics for rent.
+            </p>
+
+        </div>
+
+        <!-- Product Grid -->
+        <div class="row g-4">
+
+            @for (product of products; track product.id) {
+
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+
+                    <app-product-card
+                        [product]="product">
+                    </app-product-card>
+
+                </div>
+
+            }
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center mt-4">
+
+            <button
+                class="btn btn-outline-primary"
+                [disabled]="!previousPage"
+                (click)="goToPage(previousPage!)">
+
+                ◀ Previous
+
+            </button>
+
+            <div class="text-center">
+
+                <div>
+                    Page {{ currentPage }}
+                </div>
+
+                <small class="text-muted">
+                    Total Products: {{ totalProducts }}
+                </small>
+
+            </div>
+
+            <button
+                class="btn btn-outline-primary"
+                [disabled]="!nextPage"
+                (click)="goToPage(nextPage!)">
+
+                Next ▶
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>

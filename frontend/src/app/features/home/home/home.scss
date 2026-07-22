@@ -1,0 +1,133 @@
+.card {
+
+    border: none;
+
+    border-radius: 15px;
+
+    transition: 0.3s ease;
+
+}
+
+.card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+
+}
+
+.card-body {
+
+    font-size: 2rem;
+
+}
+
+.card h6 {
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+}
+
+.feature-card{
+
+    border:none;
+
+    border-radius:16px;
+
+    transition:0.3s ease;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.feature-icon{
+
+    font-size:3rem;
+
+}
+
+
+.step-card{
+
+    padding:30px;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    transition:.3s ease;
+
+    height:100%;
+
+}
+
+.step-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.step-number{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background:#0d6efd;
+
+    color:#fff;
+
+    font-weight:bold;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:0 auto 20px;
+
+}
+
+.step-icon{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+}
+
+
+.category-card{
+
+    cursor:pointer;
+
+    transition:.3s ease;
+
+}
+
+.category-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.category-icon{
+
+    font-size:2.5rem;
+
+}

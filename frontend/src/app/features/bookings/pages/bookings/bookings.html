@@ -1,0 +1,109 @@
+<section class="container py-5">
+
+    <h2 class="mb-4">
+
+        My Bookings
+
+    </h2>
+
+    @if (bookings.length === 0) {
+
+        <div class="alert alert-info">
+
+            You don't have any bookings yet.
+
+        </div>
+
+    } @else {
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>Product</th>
+
+                    <th>Start Date</th>
+
+                    <th>End Date</th>
+
+                    <th>Status</th>
+
+                    <th>Total</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @for (booking of bookings; track booking.id) {
+
+                    <tr>
+
+                        <td>{{ booking.product_name }}</td>
+
+                        <td>{{ booking.start_date }}</td>
+
+                        <td>{{ booking.end_date }}</td>
+
+                        <td>
+
+                            <span
+                                class="badge"
+                                [class.bg-warning]="booking.status === 'Pending'"
+                                [class.bg-success]="booking.status === 'Approved'"
+                                [class.bg-info]="booking.status === 'Active'"
+                                [class.bg-secondary]="booking.status === 'Completed'"
+                                [class.bg-danger]="booking.status === 'Cancelled'">
+
+                                    {{ booking.status }}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            ₹{{ booking.total_amount }}
+
+                        </td>
+
+                        <td>
+
+                            @if (booking.status === 'Pending') {
+
+                                <button
+                                    class="btn btn-danger btn-sm"
+                                    (click)="cancelBooking(booking.id)">
+
+                                        Cancel
+
+                                </button>
+
+                            } @else {
+
+                                <span class="text-muted">
+
+                                    —
+
+                                </span>
+
+                            }
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    }
+
+</section>

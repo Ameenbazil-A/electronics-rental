@@ -9,6 +9,8 @@ from .profile_views import ProfileView
 
 from .change_password_views import ChangePasswordView
 
+from .admin_user_views import UserListView
+
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
 
@@ -23,4 +25,10 @@ urlpatterns = [
     path("profile/", ProfileView.as_view(), name="profile"),
 
     path("change-password/", ChangePasswordView.as_view(), name="change-password"),
+
+    path(
+            "users/",
+            UserListView.as_view(),
+            name="user-list"
+    ),
 ]

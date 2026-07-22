@@ -29,6 +29,10 @@ export class EditProfile implements OnInit {
 
   private router = inject(Router);
 
+  successMessage = '';
+
+  errorMessage = '';
+
   profileForm = this.fb.group({
 
     first_name: ['', Validators.required],
@@ -79,6 +83,7 @@ export class EditProfile implements OnInit {
 
   saveProfile(): void {
 
+
     if (this.profileForm.invalid) {
 
       this.profileForm.markAllAsTouched();
@@ -87,25 +92,44 @@ export class EditProfile implements OnInit {
 
     }
 
-    this.profileService.updateProfile(this.profileForm.value).subscribe({
+
+    this.profileService.updateProfile(
+      this.profileForm.value
+    )
+    .subscribe({
 
       next: () => {
 
-        alert('Profile updated successfully.');
 
-        this.router.navigate(['/profile']);
+        this.successMessage =
+        'Profile updated successfully.';
+
+
+        setTimeout(()=>{
+
+          this.router.navigate(['/profile']);
+
+        },1000);
+
 
       },
 
-      error: (error) => {
+
+      error:(error)=>{
+
 
         console.error(error);
 
-        alert('Failed to update profile.');
+
+        this.errorMessage =
+        'Failed to update profile.';
+
 
       }
 
+
     });
+
 
   }
 

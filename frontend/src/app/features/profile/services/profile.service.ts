@@ -24,20 +24,9 @@ export class ProfileService {
 
   updateProfile(data: any): Observable<Profile> {
 
-    return this.getProfile().pipe(
-
-        switchMap(profile => {
-
-        return this.http.put<Profile>(this.apiUrl, {
-
-            username: profile.username,
-
-            ...data
-
-        });
-
-        })
-
+    return this.http.put<Profile>(
+      this.apiUrl,
+      data
     );
 
   }

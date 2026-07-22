@@ -25,7 +25,9 @@ export class ProfilePage implements OnInit {
 
       next: (response) => {
 
-        this.profile = response;
+          console.log("PROFILE RESPONSE:", response);
+
+          this.profile = response;
 
       },
 

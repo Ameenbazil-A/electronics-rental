@@ -7,9 +7,11 @@ import { RouterLink } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 
+import { ProductCard } from '../../components/product-card/product-card';
+
 @Component({
   selector: 'app-product-details',
-  imports: [ CommonModule, RouterLink],
+  imports: [ CommonModule, RouterLink, ProductCard],
   templateUrl: './product-details.html',
   styleUrl: './product-details.scss',
 })
@@ -23,20 +25,75 @@ export class ProductDetails implements OnInit {
 
   product!: Product;
 
-  ngOnInit(): void {
+  relatedProducts: Product[] = [];
 
-    this.productId = Number(
-      this.route.snapshot.paramMap.get('id')
-    );
 
-    this.productService.getProduct(this.productId).subscribe({
-      next: (product) => {
-        this.product = product;
-        console.log(product);
+
+
+  loadRelatedProducts(): void {
+
+    this.productService.getProducts(
+      '',
+      String(this.product.category)
+    ).subscribe({
+
+      next: (response) => {
+
+        this.relatedProducts = response.results
+          .filter(item => item.id !== this.product.id)
+          .slice(0, 4);
+
+      },
+
+      error: (error) => {
+
+        console.error(error);
+
       }
+
     });
 
-
   }
+  
+  loadProduct(id: number): void {
+
+    this.productService.getProduct(id).subscribe({
+
+      next: (product) => {
+
+        this.product = product;
+
+        this.loadRelatedProducts();
+
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+
+      },
+
+      error: (error) => {
+
+        console.error(error);
+
+      }
+
+    });
+
+  }  
+
+  ngOnInit(): void {
+
+    this.route.paramMap.subscribe(params => {
+
+      const id = Number(params.get('id'));
+
+      this.productId = id;
+
+      this.loadProduct(id);
+
+    });
+
+  }  
 
 }

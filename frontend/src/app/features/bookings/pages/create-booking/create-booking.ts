@@ -39,6 +39,8 @@ export class CreateBooking implements OnInit {
 
   errorMessage = '';
 
+  grandTotal = 0;
+
   today = new Date().toISOString().split('T')[0];
 
   calculateRent(): void {
@@ -47,6 +49,9 @@ export class CreateBooking implements OnInit {
 
       this.rentalDays = 0;
       this.totalRent = 0;
+
+      this.grandTotal =
+      this.totalRent + Number(this.product?.security_deposit ?? 0);
 
       return;
 
@@ -65,6 +70,7 @@ export class CreateBooking implements OnInit {
 
       this.rentalDays = 0;
       this.totalRent = 0;
+      this.grandTotal = 0;
 
       return;
 
@@ -74,6 +80,9 @@ export class CreateBooking implements OnInit {
 
     this.totalRent =
       days * Number(this.product.daily_rent);
+
+    this.grandTotal =
+      this.totalRent +Number(this.product.security_deposit);  
 
   }
 

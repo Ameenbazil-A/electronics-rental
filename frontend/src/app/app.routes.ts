@@ -36,6 +36,8 @@ import { ChangePassword } from './features/profile/pages/change-password/change-
 
 import { MyBookings } from './features/bookings/pages/my-bookings/my-bookings';
 
+import { ManageUsers } from './features/admin/pages/manage-users/manage-users';
+
 
 
 export const routes: Routes = [
@@ -134,6 +136,12 @@ export const routes: Routes = [
       {
         path: 'my-bookings',
         component: MyBookings,
+        canActivate: [authGuard]
+      },
+
+      {
+        path: 'admin/users',
+        component: ManageUsers,
         canActivate: [authGuard]
       }
 

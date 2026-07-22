@@ -1,26 +1,96 @@
 <section class="container py-5">
 
+    
+
+
     @if (product) {
 
-    <div class="card">
+        <div class="card shadow-sm mb-4">
 
-        <div class="card-body">
+            <div class="row g-0 align-items-center">
 
-            <h3>
-                {{ product.name }}
-            </h3>
+                <div class="col-md-4">
 
-            <p class="text-muted">
-                {{ product.brand }}
-            </p>
+                    <img
+                        [src]="product.image || 'https://placehold.co/600x400?text=No+Image'"
+                        class="img-fluid rounded-start"
+                        alt="Product">
 
-            <h5 class="text-primary">
-                ₹{{ product.daily_rent }} / day
-            </h5>
+                </div>
+
+                <div class="col-md-8">
+
+                    <div class="card-body">
+
+                        <h3>
+
+                            {{ product.name }}
+
+                        </h3>
+
+                        <p class="text-muted mb-1">
+
+                            {{ product.brand }}
+
+                        </p>
+
+                        <p>
+
+                            <span class="badge bg-success">
+
+                                Available
+
+                            </span>
+
+                        </p>
+
+                        <div class="row mt-3">
+
+                            <div class="col-4">
+
+                                <strong>Daily</strong>
+
+                                <div class="text-primary">
+
+                                    ₹{{ product.daily_rent }}
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-4">
+
+                                <strong>Weekly</strong>
+
+                                <div class="text-success">
+
+                                    ₹{{ product.weekly_rent }}
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-4">
+
+                                <strong>Monthly</strong>
+
+                                <div class="text-danger">
+
+                                    ₹{{ product.monthly_rent }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
-
-    </div>
 
     }
 
@@ -75,21 +145,87 @@
 
                 </p>
 
-                <p>
+                <div class="d-flex justify-content-between">
 
-                    <strong>Total Rent:</strong>
+                    <span>
+
+                        Rental Charge
+
+                    </span>
+
+                    <strong>
 
                         ₹{{ totalRent }}
 
-                </p>
+                    </strong>
 
-                <p>
+                </div>
 
-                    <strong>Security Deposit:</strong>
+                <div class="d-flex justify-content-between">
+
+                    <span>
+
+                        Security Deposit
+
+                    </span>
+
+                    <strong>
 
                         ₹{{ product?.security_deposit }}
 
-                </p>
+                    </strong>
+
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-between">
+
+                    <h5>
+
+                        Grand Total
+
+                    </h5>
+
+                    <h5 class="text-primary">
+
+                        ₹{{ grandTotal }}
+
+                    </h5>
+
+                </div>
+                
+                <div class="alert alert-light border mt-3">
+
+                    <h6>
+
+                        Rental Terms
+
+                    </h6>
+
+                    <ul class="mb-0">
+
+                        <li>
+
+                            Security deposit is refundable.
+
+                        </li>
+
+                        <li>
+
+                            Product must be returned on time.
+
+                        </li>
+
+                        <li>
+
+                            Damages may incur additional charges.
+
+                        </li>
+
+                    </ul>
+
+                </div>                
 
             </div>
 
@@ -112,11 +248,11 @@
             }
 
             <button
-                class="btn btn-success w-100"
-                (click)="confirmBooking()"
-                [disabled]="rentalDays <= 0">
+                class="btn btn-success btn-lg w-100 shadow-sm"
+                    (click)="confirmBooking()"
+                    [disabled]="rentalDays <= 0">
 
-                    Confirm Booking
+                        Confirm Booking
 
             </button>
 

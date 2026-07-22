@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 
 import { ProfileService } from '../../services/profile.service';
 
+
 @Component({
   selector: 'app-change-password',
   standalone: true,
@@ -23,28 +24,55 @@ import { ProfileService } from '../../services/profile.service';
 })
 export class ChangePassword {
 
+
   private fb = inject(FormBuilder);
 
   private profileService = inject(ProfileService);
 
   private router = inject(Router);
 
+
+
+  successMessage = '';
+
+  errorMessage = '';
+
+
+
   passwordForm = this.fb.group({
 
-    current_password: ['', Validators.required],
+    current_password: [
+      '',
+      Validators.required
+    ],
 
-    new_password: ['', [
-      Validators.required,
-      Validators.minLength(8)
-    ]],
+    new_password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(6)
+      ]
+    ],
 
-    confirm_password: ['', Validators.required]
+    confirm_password: [
+      '',
+      Validators.required
+    ]
 
   });
 
-  save(): void {
 
-    if (this.passwordForm.invalid) {
+
+  changePassword(): void {
+
+
+    this.successMessage = '';
+
+    this.errorMessage = '';
+
+
+
+    if(this.passwordForm.invalid){
 
       this.passwordForm.markAllAsTouched();
 
@@ -52,47 +80,84 @@ export class ChangePassword {
 
     }
 
+
+
+    const data = this.passwordForm.value;
+
+
+
+    if(
+      data.new_password !== data.confirm_password
+    ){
+
+      this.errorMessage =
+      "New passwords do not match.";
+
+      return;
+
+    }
+
+
+
     this.profileService.changePassword(
-      this.passwordForm.value as any
-    ).subscribe({
+      data as any
+    )
+    .subscribe({
 
-      next: () => {
+      next:(response)=>{
 
-        alert('Password changed successfully.');
 
-        this.router.navigate(['/profile']);
+        this.successMessage =
+        "Password changed successfully.";
+
+
+
+        setTimeout(()=>{
+
+          this.router.navigate(['/profile']);
+
+        },1500);
+
+
 
       },
 
-      error: (error) => {
+
+      error:(error)=>{
+
 
         console.error(error);
 
-        if (error.error?.current_password) {
 
-          alert(error.error.current_password[0]);
 
-        }
-        else if (error.error?.new_password) {
+        if(error.error?.current_password){
 
-          alert(error.error.new_password[0]);
+          this.errorMessage =
+          error.error.current_password[0];
 
         }
-        else if (error.error?.confirm_password) {
+        else if(error.error?.new_password){
 
-          alert(error.error.confirm_password[0]);
-
-        }
-        else {
-
-          alert('Failed to change password.');
+          this.errorMessage =
+          error.error.new_password[0];
 
         }
+        else{
+
+          this.errorMessage =
+          "Failed to change password.";
+
+        }
+
 
       }
 
+
     });
 
+
+
   }
+
 
 }
